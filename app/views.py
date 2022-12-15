@@ -7,7 +7,7 @@ from django.db.models import Q
 # Create your views here.
 
 def adminUser(request):
-    if request.user.is_superuser:
+    if request.user.is_superuser and request.user.is_authenticated:
         if request.method == 'POST':
             name = request.POST['name']
             link = request.POST['link']
@@ -17,9 +17,9 @@ def adminUser(request):
             image = request.FILES.get('image')
             saveApp = App(appName = name, appLinks = link, appCategory = category, appSubCategory = subCategory, appPoints = points, appImage = image)
             saveApp.save()
-            return redirect("home")
+            return redirect("adminHome")
         return render(request,"index.html")
-    else:
+    elif request.user.is_authenticated:
         user = request.user
         if Task.objects.filter(user=user).exists():
             apps = App.objects.filter(~Q(taskCompleted=user))         
@@ -35,7 +35,9 @@ def adminUser(request):
                 'user':user,
                 'app': apps
             }
-            return render(request,"UserFacing.html",context)    
+            return render(request,"UserFacing.html",context) 
+    else:
+        return redirect("login")           
 
 def signin(request):
     if request.method == 'POST' :
@@ -80,36 +82,45 @@ def logoutUser(request):
         return redirect("login")
 
 def uploadScreenShort(request, id=None):
-    if request.method =='POST':
-        user = request.user
+    if request.user.is_authenticated:
+        if request.method =='POST':
+            user = request.user
+            app = App.objects.filter(id=id)[0]
+            image = request.FILES.get('imagess')
+            task =Task.objects.create(
+                user = user, 
+                app = app, 
+                screenShort = image
+            )
+            app.taskCompleted.add(user)
+            app.save()
+            task.save()
+            return redirect("home")
         app = App.objects.filter(id=id)[0]
-        image = request.FILES.get('imagess')
-        task =Task.objects.create(
-            user = user, 
-            app = app, 
-            screenShort = image
-        )
-        app.taskCompleted.add(user)
-        app.save()
-        task.save()
-        return redirect("home")
-    app = App.objects.filter(id=id)[0]
-    context = {
-        'app':app
-    } 
-    return render(request, "uploadScreenshot.html", context)
+        context = {
+            'app':app
+        } 
+        return render(request, "uploadScreenshot.html", context)
+    else:
+        return redirect("login")    
 
 def adminHome(request):
-    app = App.objects.all()
-    context = {
-        'app':app
-    }
-    return render(request, 'adminHOME.html', context)
+    if request.user.is_superuser and request.user.is_authenticated:
+        app = App.objects.all()
+        context = {
+            'app':app
+        }
+        return render(request, 'adminHOME.html', context)
+    else:
+        return redirect("login")    
 
 def userHome(request):
-    user = request.user
-    app = App.objects.filter(taskCompleted = user)
-    context = {
-        'app':app
-    }
-    return render(request, 'userHOME.html', context)    
+    if request.user.is_authenticated:
+        user = request.user
+        app = App.objects.filter(taskCompleted = user)
+        context = {
+            'app':app
+        }
+        return render(request, 'userHOME.html', context) 
+    else:
+        return redirect("login")        
