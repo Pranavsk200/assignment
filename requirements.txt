@@ -44,7 +44,6 @@ sqlparse==0.4.2
 tomli==2.0.1
 tomlkit==0.11.4
 Twisted==21.7.0
-twisted-iocpsupport==1.0.2
 txaio==21.2.1
 typing-extensions==3.10.0.2
 urllib3==1.26.13
