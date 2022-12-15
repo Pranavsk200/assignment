@@ -1,0 +1,68 @@
+.containe{
+    width: 100%;
+    margin: 0px;
+    height: 100vh;
+}
+
+h2{
+    text-align: center;
+}
+
+.display{
+    display: flex;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(233, 229, 229);
+}
+
+.navagation{
+    display: flex;
+    flex-direction: column;
+    width: 20%;
+}
+
+.btn{
+    background-color: white;
+    margin: 10px;
+}
+
+.editapp{
+    width: 100%;
+    height: 100%;
+    background-color: white;
+}
+
+.image{
+    width: 60px;
+    height: 60px;
+}
+
+.appItems{
+    display: flex;
+    flex-direction: column;
+    background-color:  rgb(233, 229, 229);
+    margin: 10px;
+}
+
+.appItem{
+    display: flex;
+    width: 100%;
+    height: inherit;
+    padding: 10px;
+}
+
+.logoImage{
+    width: 10%;
+    align-self: center;
+    text-align: center;
+}
+
+.titleApp{
+    width: 40%;
+}
+
+.points{
+    width: 50%;
+}
+
+
