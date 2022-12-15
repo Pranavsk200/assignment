@@ -1,0 +1,41 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+</head>
+<body>
+  <div class="login-page">
+  <div class="form">
+    {% comment %} <form class="register-form">
+      <input type="text" placeholder="name"/>
+      <input type="password" placeholder="password"/>
+      <input type="text" placeholder="email address"/>
+      <button>create</button>
+      <p class="message">Already registered? <a href="#">Sign In</a></p>
+    </form> {% endcomment %}
+    <form class="login-form" method="POST" action="signin">
+    {% csrf_token %}
+      <input type="text" placeholder="username" name="username"/>
+      <input type="password" placeholder="password" name="pass"/>
+      <input type="password" placeholder="re-password" name="repass"/>
+      <button>sign-in</button>
+      {% comment %} <p class="message">Not registered? <a href="#">Create an account</a></p> {% endcomment %}
+      {% for message in messages %}
+			<p style="color: black;font-size: 30px;text-align: center;">{{message}}</p>
+		{% endfor %}
+    </form>
+  </div>
+</div>
+</body>
+<script>
+$('.message a').click(function(){
+   $('form').animate({height: "toggle", opacity: "toggle"}, "slow");
+});
+</script>
+</html>
+
+

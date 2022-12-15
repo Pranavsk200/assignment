@@ -1,0 +1,47 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+    <title>Document</title>
+</head>
+<body>
+    <div class="containe">
+        <h2>Hellow Admin</h2>
+        <div class="display">
+            <div class="navagation">
+                <a href="{% url 'adminHome' %}"><button type="button" class="btn btn-outline-primary" style="width: 100%;">Home</button></a>
+                <a href="{% url 'home' %}"><button type="button" class="btn btn-outline-primary" style="width: 100%;">Add app</button></a>
+                <a href="{% url 'logout' %}"><button type="button" class="btn btn-outline-primary" style="width: 100%;">Logout</button></a>
+            </div>
+            <div class="editapp" style="margin: 20px;">
+                <div>
+                    <form action="/" method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="image" style="text-align: center; margin: 5px;">
+                            <img src="{% static 'default.jpg' %}" alt="" style="width: 30%; height: 30%; ">
+                            <input type="file" name="image">
+                        </div>
+                        
+                        <div style="display: flex;">
+                            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="App Name" name=name>
+                            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="App link" name="link">
+                        </div>
+                        <div style="display: flex;">
+                            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Add Category"name="category">
+                            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Add Sub Category" name="subCategory">
+                        </div>
+                        <input type="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Add points to the app" name="points">
+                        <button type="submit" class="btn btn-outline-primary" style="text-align: center;">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</body>
+</html>
