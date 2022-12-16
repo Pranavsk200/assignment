@@ -23,18 +23,18 @@
                         {% csrf_token %}
                         <div class="image" style="text-align: center; margin: 5px;">
                             <img src="{% static 'default.jpg' %}" alt="" style="width: 30%; height: 30%; ">
-                            <input type="file" name="image">
+                            <input type="file" name="image" required>
                         </div>
                         
                         <div style="display: flex;">
-                            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="App Name" name=name>
-                            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="App link" name="link">
+                            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="App Name" name=name required>
+                            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="App link" name="link" required>
                         </div>
                         <div style="display: flex;">
-                            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Add Category"name="category">
-                            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Add Sub Category" name="subCategory">
+                            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Add Category"name="category" required>
+                            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Add Sub Category" name="subCategory" required>
                         </div>
-                        <input type="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Add points to the app" name="points">
+                        <input type="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Add points to the app" name="points" required>
                         <button type="submit" class="btn btn-outline-primary" style="text-align: center;">Submit</button>
                     </form>
                 </div>
