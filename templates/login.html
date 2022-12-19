@@ -8,15 +8,13 @@
     <link rel="stylesheet" href="{% static 'css/login.css' %}">
 </head>
 <body>
+  {% for message in messages %}
+      <div class="alert alert-primary" role="alert">
+          {{message}}
+      </div>
+  {% endfor %}
   <div class="login-page">
   <div class="form">
-    {% comment %} <form class="register-form">
-      <input type="text" placeholder="name"/>
-      <input type="password" placeholder="password"/>
-      <input type="text" placeholder="email address"/>
-      <button>create</button>
-      <p class="message">Already registered? <a href="#">Sign In</a></p>
-    </form> {% endcomment %}
     <form class="login-form"method="POST" action="login">
     {% csrf_token %}
       <input type="text" placeholder="username" name="username"/>

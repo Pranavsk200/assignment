@@ -9,5 +9,5 @@ urlpatterns = [
     path("upload/<int:id>",views.uploadScreenShort, name="upload"),
     path("adminHome",views.adminHome, name="adminHome"),
     path("userHome",views.userHome, name="userHome"),
-
+    path("userPoints",views.points, name="userPoints"),
 ]

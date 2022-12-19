@@ -19,32 +19,24 @@
         <div class="display">
             <div class="navagation">
                 <a href="{% url 'userHome' %}"><button type="button" class="btn btn-outline-primary"style="width: 100%;">Home</button></a>
-                <a href="{% url 'userPoints' %}"><button type="button" class="btn btn-outline-primary" style="width: 100%;">Points</button></a>
+                <button type="button" class="btn btn-outline-primary" style="width: 100%;">Profile</button>
                 <a href="{% url 'home' %}"><button type="button" class="btn btn-outline-primary" style="width: 100%;">Task</button></a>
                 <a href="{% url 'logout' %}"><button type="button" class="btn btn-outline-primary" style="width: 100%;">Logout</button></a>
             </div>
             <div class="editapp" style="margin: 20px;">
                 <div class="appItems">
-                    {% if app %}
-                    {% for task in app %}
-                    <div class="appItem">
-                        <div class="logoImage">
-                            <img src="{{task.appImage.url}}" alt="" style="width: 40px; height: 40px;">
-                        </div>
-                        <div class="titleApp">
-                            <h2 style="text-align:left;">
-                                {{task.appName}}
-                            </h2>
-                            <a href="{% url 'upload' id=task.id %}">View in detail</a>
-                        </div>
-                        <div class="points">
-                            <button type="button" class="btn btn-outline-primary" style="float: right;">{{task.appPoints}}</button>
-                        </div>
+                    <h3>
+                        You have gained the following points
+                    </h3>
+                    <div style="text-align: center;">
+                            <button type="button" class="btn btn-outline-primary">
+                                {% if points == null %}
+                                    0
+                                {% else %}
+                                    {{points}}
+                                {% endif %}
+                            </button></a>
                     </div>
-                    {% endfor %}
-                    {% else %}
-                        <h2>You didn't completed any task</h2>
-                    {% endif %}
                 </div>
             </div>
         </div>

@@ -9,13 +9,17 @@
     <title>Document</title>
 </head>
 <body>
+    {% for message in messages %}
+      <div class="alert alert-primary" role="alert">
+          {{message}}
+      </div>
+    {% endfor %}
     <div class="containe">
         <h2>All Apps</h2>
         <div class="display">
             <div class="navagation">
-                <button type="button" class="btn btn-outline-primary"style="width: 100%;">Home</button>
-                <button type="button" class="btn btn-outline-primary" style="width: 100%;">Profile</button>
-                <a href="{% url 'home' %}"><button type="button" class="btn btn-outline-primary" style="width: 100%;">Task</button></a>
+                <a href="{% url 'adminHome' %}"><button type="button" class="btn btn-outline-primary"style="width: 100%;">Home</button></a>
+                <a href="{% url 'home' %}"><button type="button" class="btn btn-outline-primary" style="width: 100%;">Add APP</button></a>
                 <a href="{% url 'logout' %}"><button type="button" class="btn btn-outline-primary" style="width: 100%;">Logout</button></a>
             </div>
             <div class="editapp" style="margin: 20px;">

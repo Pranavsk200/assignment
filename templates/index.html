@@ -9,6 +9,11 @@
     <title>Document</title>
 </head>
 <body>
+    {% for message in messages %}
+      <div class="alert alert-primary" role="alert">
+          {{message}}
+      </div>
+    {% endfor %}
     <div class="containe">
         <h2>Hellow Admin</h2>
         <div class="display">

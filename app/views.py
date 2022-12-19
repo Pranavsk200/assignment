@@ -3,6 +3,7 @@ from django.contrib.auth import authenticate, login as dj_login,logout
 from django.contrib.auth.models import User
 from .models import *
 from django.db.models import Q
+from django.contrib import messages
 
 # Create your views here.
 
@@ -86,16 +87,19 @@ def uploadScreenShort(request, id=None):
         if request.method =='POST':
             user = request.user
             app = App.objects.filter(id=id)[0]
-            image = request.FILES.get('imagess')
-            task =Task.objects.create(
-                user = user, 
-                app = app, 
-                screenShort = image
-            )
-            app.taskCompleted.add(user)
-            app.save()
-            task.save()
-            return redirect("home")
+            if App.objects.filter(id=id).filter(taskCompleted=user).exists()==False:
+                image = request.FILES.get('imagess')
+                task =Task.objects.create(
+                    user = user, 
+                    app = app, 
+                    screenShort = image
+                )
+                app.taskCompleted.add(user)
+                app.save()
+                task.save()
+                return redirect("home")
+            else:
+                messages.info(request,"You have already complited the task")       
         app = App.objects.filter(id=id)[0]
         context = {
             'app':app
@@ -124,3 +128,16 @@ def userHome(request):
         return render(request, 'userHOME.html', context) 
     else:
         return redirect("login")        
+
+def points(request):
+    if request.user.is_authenticated:
+        user = request.user
+        app = App.objects.filter(taskCompleted=user)
+        points= 0
+        for i in app:
+            points += i.appPoints
+        conttext = {
+            'points':points
+        }
+        return render(request, "points.html", conttext)    
+
