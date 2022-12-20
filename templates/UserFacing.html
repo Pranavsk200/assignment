@@ -19,7 +19,7 @@
         <div class="display">
             <div class="navagation">
                 <a href="{% url 'userHome' %}"><button type="button" class="btn btn-outline-primary"style="width: 100%;">Home</button></a>
-                <button type="button" class="btn btn-outline-primary" style="width: 100%;">Profile</button>
+                <a href="{% url 'userPoints' %}"><button type="button" class="btn btn-outline-primary" style="width: 100%;">Points</button></a>
                 <a href="{% url 'home' %}"><button type="button" class="btn btn-outline-primary" style="width: 100%;">Task</button></a>
                 <a href="{% url 'logout' %}"><button type="button" class="btn btn-outline-primary" style="width: 100%;">Logout</button></a>
             </div>
